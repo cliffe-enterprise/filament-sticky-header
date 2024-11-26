@@ -1,10 +1,18 @@
-const filamentTopbar = document.querySelector(".fi-topbar");
-const filamentMainContent = document.querySelector(".fi-main");
-const filamentHeader = document.querySelector(".fi-header");
+window.addEventListener("load", function () {
+    initializeStickyHeader();
+})
 
-if (filamentTopbar && filamentMainContent && filamentHeader) {
-    if (filamentData?.stickyHeaderActive) {
-        window.addEventListener("load", function () {
+document.addEventListener('livewire:navigated', () => {
+    initializeStickyHeader();
+})
+
+function initializeStickyHeader() {
+    const filamentTopbar = document.querySelector(".fi-topbar");
+    const filamentMainContent = document.querySelector(".fi-main");
+    const filamentHeader = document.querySelector(".fi-header");
+
+    if (filamentTopbar && filamentMainContent && filamentHeader) {
+        if (filamentData?.stickyHeaderActive) {
             const trigger = document.createElement("div");
             const theme = filamentData?.stickyHeaderTheme || 'default';
             trigger.classList.add("filament-sticky-trigger");
@@ -45,6 +53,6 @@ if (filamentTopbar && filamentMainContent && filamentHeader) {
             );
 
             observer.observe(trigger);
-        });
+        }
     }
 }
